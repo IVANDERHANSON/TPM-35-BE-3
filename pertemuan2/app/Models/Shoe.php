@@ -12,6 +12,7 @@ class Shoe extends Model
     protected $fillable = [
         'Name',
         'Size',
-        'Color'
+        'Color',
+        'Image'
     ];
 }

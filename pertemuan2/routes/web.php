@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShoeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 });
+
+Route::get('/create-shoe', [ShoeController::class, 'createShoe']);
+Route::post('/create-shoe1', [ShoeController::class, 'createShoe1']);
+Route::get('/read-shoes', [ShoeController::class, 'readShoes']);
