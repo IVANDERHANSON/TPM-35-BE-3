@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Shoe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -9,7 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class ShoeController extends Controller
 {
     function createShoe() {
-        return view('createShoe');
+        $categories = Category::all();
+        return view('createShoe', compact('categories'));
     }
 
     function createShoe1(Request $request) {
@@ -17,7 +19,8 @@ class ShoeController extends Controller
             'Name' => ['required', 'min:5'],
             'Size' => ['required', 'integer', 'min:35'],
             'Color' => ['required'],
-            'Image' => ['required', 'image']
+            'Image' => ['required', 'image'],
+            'CategoryId' => ['required']
         ]);
 
         $filename = $request->file('Image')->getClientOriginalName();
@@ -27,14 +30,15 @@ class ShoeController extends Controller
             'Name' => $request->Name,
             'Size' => $request->Size,
             'Color'  => $request->Color,
-            'Image' => $filename
+            'Image' => $filename,
+            'CategoryId' =>$request->CategoryId
         ]);
 
         return redirect('/read-shoes');
     }
 
     function readShoes() {
-        $shoes = Shoe::all();
+        $shoes = Shoe::paginate(5);
         return view('readShoes', compact('shoes'));
     }
 

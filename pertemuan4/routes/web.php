@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ShoeController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,7 @@ Route::get('/read-shoes', [ShoeController::class, 'readShoes']);
 Route::get('/edit-shoe/{id}', [ShoeController::class, 'editShoe']);
 Route::patch('/update-shoe/{id}', [ShoeController::class, 'updateShoe']);
 Route::delete('/delete-shoe/{id}', [ShoeController::class, 'deleteShoe']);
+
+// Category 
+Route::get('/create-category', [CategoryController::class, 'createCategory']);
+Route::post('/create-category1', [CategoryController::class, 'createCategory1']);

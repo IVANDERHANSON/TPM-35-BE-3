@@ -8,13 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <nav>
-        <a href="/read-shoes">Read Shoes</a>
-        <a href="#">Create Shoe</a>
-    </nav>
-
-    <br><br><br>
-
+    <x-navbar/>
     <div class="w-80 d-flex justify-content-center">
         <form action="/create-shoe1" method="POST" enctype="multipart/form-data">
             @csrf
@@ -56,6 +50,17 @@
                 <input type="file" class="form-control" id="Image" aria-describedby="emailHelp" name="Image" value="{{ old('Image') }}">
                 @error('Image')
                     <p style="color: red;">The Image field is required.</p>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="Default select example" name="CategoryId">
+                    <option selected style="display: none;"></option>
+                    @foreach ($categories as $c)
+                        <option value="{{ $c->CategoryId }}">{{ $c->Name }}</option>
+                    @endforeach
+                </select>
+                @error('CategoryId')
+                    <p style="color: red;">The Category field is required.</p>
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

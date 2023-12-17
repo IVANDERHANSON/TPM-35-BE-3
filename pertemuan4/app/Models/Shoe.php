@@ -13,6 +13,11 @@ class Shoe extends Model
         'Name',
         'Size',
         'Color',
-        'Image'
+        'Image',
+        'CategoryId'
     ];
+
+    public function Category() {
+        return $this->belongsTo(Category::class);
+    }
 }

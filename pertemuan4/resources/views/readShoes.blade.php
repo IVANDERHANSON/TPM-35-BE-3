@@ -9,20 +9,14 @@
 </head>
 <body>
     <div style="margin-left: 50px">
-        <nav>
-            <a href="#">Read Shoes</a>
-            <a href="/create-shoe">Create Shoe</a>
-        </nav>
-    
-        <br><br><br>
-    
-        <div>
+        <x-navbar/>
+        <div class="d-flex">
             @forelse ($shoes as $shoe)
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 18rem; margin: 10px">
                     <h3>{{ $shoe->Name }}</h3>
                     <h3>{{ $shoe->Size }}</h3>
                     <h3>{{ $shoe->Color }}</h3>
-                    <img src="{{ asset('storage/'.$shoe->Image) }}" alt="Nike Air Jordan 1">
+                    <img src="{{ $shoe->Image }}" alt="{{ $shoe->Image }}">
                     <div style="display: flex; justify-content: space-around; margin: 20px">
                         <a href="/edit-shoe/{{ $shoe->id }}"><button class="btn btn-primary">Edit</button></a>
                         <form action="/delete-shoe/{{ $shoe->id }}" method="POST">
@@ -36,6 +30,10 @@
             @empty
                 <h3>Data is empty.</h3>
             @endforelse
+        </div>
+        <br><br>
+        <div class="d-flex justify-content-center">
+            {{ $shoes->onEachSide(1)->links() }}
         </div>
     </div>
 
